@@ -1,0 +1,130 @@
+<div class="chart-table chart-container-common">
+    <div class="table-head">
+        <span class="span1">排名</span>
+        <span class="span2">企业名称</span>
+        <span class="span3">指数</span>
+    </div>
+    <div class="table-body">
+        <div class="table-item">
+            <span class="span1">1</span>
+            <span class="span2">腾讯</span>
+            <span class="span3">1608</span>
+        </div>
+        <div class="table-item">
+            <span class="span1">2</span>
+            <span class="span2">小米</span>
+            <span class="span3">1608</span>
+        </div>
+        <div class="table-item">
+            <span class="span1">3</span>
+            <span class="span2">淘宝</span>
+            <span class="span3">1608</span>
+        </div>
+        <div class="table-item">
+            <span class="span1">4</span>
+            <span class="span2">蚂蚁金服</span>
+            <span class="span3">1608</span>
+        </div>
+        <div class="table-item">
+            <span class="span1">5</span>
+            <span class="span2">百度</span>
+            <span class="span3">1608</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .chart-table {
+        width: 430px;
+    background: linear-gradient(to bottom, #052b55 , #040f35, #052b55);
+    height: 35px;
+    margin: 0 auto;
+    line-height: 35px;
+    color: #fff;
+    text-align: center;
+    }
+    .chart-table .table-head .span1 {
+    display: inline-block;
+    width: 60px;
+    text-align: center;
+    }
+    .chart-table .table-head .span2 {
+    display: inline-block;
+    width: 280px;
+    text-align: center;
+    }
+    .chart-table .table-head .span3 {
+    display: inline-block;
+    width: 60px;
+    text-align: center;
+    }
+    .chart-table .table-body {
+        height: 200px;
+        background: #052b55;
+        overflow: hidden;
+    }
+    .chart-table .table-body .table-item {
+    line-height: 35px;
+    height: 40px;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    }
+    .chart-table .table-body .span1 {
+    display: inline-block;
+    width: 60px;
+    text-align: center;
+    /* background: url(../images/index.png) no-repeat center center; */
+    }
+    .chart-table .table-body .span2 {
+    display: inline-block;
+    width: 280px;
+    }
+    .chart-table .table-body .span3 {
+    display: inline-block;
+    width: 60px;
+    }
+</style>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    renderIpCompanyTop10();
+  function renderIpCompanyTop10() {
+    // 数据
+    let tableTopData = [
+      { name: '小米科技有限公司', qty: 1608 },
+      { name: '紫米科技有限公司', qty: 743 },
+      { name: '中兴科技有限公司', qty: 652 },
+      { name: '腾讯科技有限公司', qty: 537 },
+      { name: '西山居工作室', qty: 449 },
+    ];
+
+    // 绑定动画
+    let timer = null;
+    let $chartList = $(".chart-table .table-item");
+    $chartList.hover(function () {
+      // 鼠标移入
+      clearInterval(timer);
+    }, function () {
+      // 鼠标移出
+      timer = setInterval(function () {
+        newsScroll();
+      }, 1200);
+    }).trigger("mouseleave");  // 自动触发触摸事件
+
+    // 滚动动画
+    function newsScroll() {
+      let $ele = $(".chart-table .table-item:first");
+      let scrollHeight = $(".chart-table .table-item").height(); // 获得当前<li>的高度
+
+      $ele.stop().animate({
+        marginTop: -scrollHeight
+      },
+      600,
+      function () {
+        $(".chart-table .table-body").append($ele);
+        $(".chart-table .table-item").css('margin-top', 0);
+      });
+    }
+  }
+</script>
